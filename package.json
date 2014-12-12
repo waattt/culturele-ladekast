@@ -1,37 +1,16 @@
 {
-  "name": "culturele-ladekast",
-  "version": "0.0.1",
-  "description": "LxD school project, using arduino, firmata and socket.io running on nodejs to let te real world interact with the digital.",
-  "author": "Timon van Dreumel <timonvandreumel@gmail.com>",
-  "contributors": [{
-  "name": "Foo Bar",
-  "email": "foo.bar@example.com"
-}],
-  "scripts": {
-    "start": "node server.js",
-  },
-  "repository": {
-  "type": "git",
-  "url": "https://github.com/waattt/culturele-ladekast"
-},
-  "bugs": {
-  "url": "https://github.com/waattt/culturele-ladekast/issues"
-},
-  "keywords": [
-  "nodejs",
-  "arduino",
-  "LxD"
-],
-  "dependencies": {
-    "node": "0.10.33",
-    "arduino-firmata": "0.3.2",
-    "socket.io": "1.2.1"
-  },
-  "preferGlobal": true,
-  "private": true,
-  "publishConfig": {
-  "registry": "https://your-private-hosted-npm.registry.nodejitsu.com"
-},
-  "analyze": true,
-  "license": "MIT"
+    "name" : "culturele-ladekast",
+    "version" : "0.0.1",
+    "description" : "LxD school project, using arduino, firmata and socket.io running on nodejs to let te real world interact with the digital.",
+    "author" : "Timon van Dreumel <timonvandreumel@gmail.com>",
+    "contributors" : [],
+    "dependencies": {
+        "arduino-firmata": "0.3.2",
+        "socket.io": "1.2.1"
+    },
+    "bugs": {
+        "url": "https://github.com/waattt/culturele-ladekast/issues"
+    },
+    "repository" : {"type": "git", "url": "git://github.com/waattt/culturele-ladekast.git"},
+    "license": "MIT"
 }
