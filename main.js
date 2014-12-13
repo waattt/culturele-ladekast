@@ -1,20 +1,9 @@
 var socket = io.connect(location.protocol+"//"+location.hostname)
-
 socket.on('connect', function(){
-  console.log('connect!!');
+  console.log('Connected to server.');
 
   socket.on('digitalRead', function(v){
-    $("#analog").text(v);
+    $("#read").text("Pin: " + v.pin + " Value: " + v.value);
+    console.log("Pin: " + v.pin + " Value: ", v.value);
   });
-});
-
-$(function(){
-  $("#btn_on").click(function(){
-    socket.emit("digitalWrite", true);
-  });
-
-  $("#btn_off").click(function(){
-    socket.emit("digitalWrite", false);
-  });
-
 });
