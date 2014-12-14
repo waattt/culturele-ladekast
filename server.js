@@ -19,7 +19,7 @@ var app_handler = function(req, res) {
 
 var app = http.createServer(app_handler);
 var io = require('socket.io').listen(app);
-var port = process.argv[2]-0 || 3000;
+var port = process.argv[2]-0 || 80;
 app.listen(port);
 console.log("server start - port:" + port);
 console.log(" => http://localhost:"+port);
@@ -32,7 +32,6 @@ arduino.on('connect', function(){
   console.log('Arduino verbonden en ready to rock!');
 
   arduino.pinMode(7, ArduinoFirmata.INPUT);
-  arduino.pinMode(4, ArduinoFirmata.INPUT);
 
   // Als het programma met CTRL-C afgesloten wordt
   // sluit hij de verbinding met de arduino 'goed' af

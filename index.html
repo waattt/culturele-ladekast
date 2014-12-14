@@ -1,14 +1,25 @@
 <html>
-  <head>
-    <title>De Culturele Ladekast</title>
-  </head>
-  <body>
-    <h1>node-arduino-firmata</h1>
-    <p>
-      <span id="read"></span>
-    </p>
+    <head>
+        <title>De Culturele Ladekast</title>
+        <link rel="stylesheet" type="text/css" href="./css/style.css" />
+    </head>
+    <body>
+    <div class="wrap-all">
+      <div class="wrap">
+          <ul class="drawers">
+              <li class="drawer"><span class="handle"></span></li>
+              <li class="la-7 drawer"><span class="handle"></span></li>
+              <li class="drawer"><span class="handle"></span></li>
+              <li class="drawer"><span class="handle"></span></li>
+          </ul>
+      </div>
+        <div class="hoi">
+            <h1>De Culturele Ladekast</h1>
+            <span id="read"></span>
+        </div>
+    </div>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="./jquery.js"></script>
-    <script src="./main.js"></script>
+    <script src="./js/jquery.js"></script>
+    <script src="./js/main.js"></script>
   </body>
 </html>
