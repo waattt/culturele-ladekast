@@ -1,3 +1,19 @@
+/*/////////////////////////////////////////////////////////
+  SERVER.JS
+  Maakt verbinding met de Arduino en stuurt die gegevens
+  door naar de 'client' (in dit geval de browser).
+  
+  CONTENTS:
+  1. Initial Setup 
+  2. Arduino
+  3.
+
+//////////////////////////////////////////////////////////*/
+
+/*//////////////////////////////////////////////////////////
+///////////////////// 1. Initial Setup /////////////////////
+//////////////////////////////////////////////////////////*/
+
 var http = require('http');
 var fs = require('fs');
 var url = require('url');
@@ -24,6 +40,10 @@ app.listen(port);
 console.log("server start - port:" + port);
 console.log(" => http://localhost:"+port);
 
+/*//////////////////////////////////////////////////////////
+///////////////////////// 2. Arduino ///////////////////////
+//////////////////////////////////////////////////////////*/
+
 var ArduinoFirmata = require('arduino-firmata');
 arduino = new ArduinoFirmata().connect();
 
@@ -33,12 +53,9 @@ arduino.on('connect', function(){
 
   arduino.pinMode(7, ArduinoFirmata.INPUT);
 
-  // Als het programma met CTRL-C afgesloten wordt
-  // sluit hij de verbinding met de arduino 'goed' af
-  // Anders krijg je problemen met de volgende opstart
-  process.stdin.resume();
-  process.on('SIGINT', function(){
-    arduino.close(process.exit(2));
+  process.stdin.resume();                                       // Als het programma met CTRL-C afgesloten wordt
+  process.on('SIGINT', function(){                              // sluit hij de verbinding met de arduino 'goed' af  
+      arduino.close(process.exit(2));                           // Anders krijg je problemen met de volgende opstart
   });
 });
 
