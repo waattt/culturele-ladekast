@@ -35,7 +35,7 @@ var app_handler = function(req, res) {
 
 var app = http.createServer(app_handler);
 var io = require('socket.io').listen(app);
-var port = process.argv[2]-0 || 80;
+var port = process.argv[2]-0 || 8080;
 app.listen(port);
 console.log("server start - port:" + port);
 console.log(" => http://localhost:"+port);
@@ -43,6 +43,9 @@ console.log(" => http://localhost:"+port);
 /*//////////////////////////////////////////////////////////
 ///////////////////////// 2. Arduino ///////////////////////
 //////////////////////////////////////////////////////////*/
+var DigitInputPins = [
+    3, 4, 5, 6, 7, 8
+];
 
 var ArduinoFirmata = require('arduino-firmata');
 arduino = new ArduinoFirmata().connect();
@@ -51,22 +54,29 @@ arduino.on('connect', function(){
   console.log("Arduino board version: " + arduino.boardVersion);
   console.log('Arduino verbonden en ready to rock!');
 
-  arduino.pinMode(7, ArduinoFirmata.INPUT);
+  for (var i = 0; i < DigitInputPins.length; i++) {
+    arduino.pinMode(DigitInputPins[i], ArduinoFirmata.INPUT);
+  }
 
-  process.stdin.resume();                                       // Als het programma met CTRL-C afgesloten wordt
-  process.on('SIGINT', function(){                              // sluit hij de verbinding met de arduino 'goed' af  
-      arduino.close(process.exit(2));                           // Anders krijg je problemen met de volgende opstart
+  process.stdin.resume();
+  process.on('SIGINT', function(){  
+      arduino.close(process.exit(2));
   });
 });
 
-// emit sensor-value to HTML-side
 io.sockets.on('connection', function(socket) {
-    
-  //Als er een digitale sensor veranderd; doe dit:
+    /*///////////////////////////////////////////////////////
+    // initial sensor status                               */
+    for (var i = 0; i < DigitInputPins.length; i++) {
+        var read = arduino.digitalRead(DigitInputPins[i]);
+        var digiRead = {pin: DigitInputPins[i], value: read};
+        socket.emit("InitDigitalRead", digiRead);
+   }
+  /*/////////////////////////////////////////////////////////
+  // Digital sensor change                                 */
   arduino.on('digitalChange', function(e){
-    //console.log("pin" + e.pin + " : " + e.old_value + " -> " + e.value);
     console.log("pin" + e.pin + " : " + e.value);
-    var digiRead = {pin: e.pin, value: e.value};
+    var digiRead = {pin: e.pin, value: e.value, old_value: e.old_value};
     socket.emit("digitalRead", digiRead);
   });
 
