@@ -30,6 +30,7 @@ section.een, section.drie {
     margin: -640px 0 0 -512px;
 }
 section.een {
+    display: block;
     -webkit-transform: rotate(-90deg);
        -moz-transform: rotate(-90deg);
          -o-transform: rotate(-90deg);

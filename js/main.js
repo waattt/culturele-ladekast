@@ -36,6 +36,7 @@ socket.on('connect', function(){
     if(v.pin == startKnopPin){
         if(v.value != v.old_value){
            showSection('een');
+            kant1();
         }
     }
     if(v.pin == la1Pin){
@@ -47,6 +48,7 @@ socket.on('connect', function(){
     if(v.pin == Knop1Pin || v.pin == Knop2Pin || v.pin == Knop3Pin){
         if(v.value == true){
             showSection('drie');
+            kant3(v.pin);
         }
     }
     if(v.pin == la2Pin){
@@ -59,6 +61,9 @@ socket.on('connect', function(){
 function showSection(showMe){
     $('section').hide();
     $('section.'+ showMe).show();
+}
+function kant1(){
+    //play video en time het
 }
 var interval2Triggered = false;   
 function kant2(){
@@ -81,5 +86,33 @@ function kant2(){
                 interval2Triggered = false;                
             }
         }, 1000);
+    }
+}
+var kant3introDone = false;
+function kant3(pin){
+    if(kant3introDone){
+        if(pin = Knop1Pin){
+            //show pin 1 - klas 3/4
+        }
+        if(pin = Knop2Pin){
+            //drama
+        }
+        if(pin = Knop3Pin){
+            //recepteren
+        }
+    }else {
+        var tel = 0;
+        var teller = setInterval(function () {
+            ++tel;
+            console.log(tel);
+            if(tel == 5){
+                $('.knoppen-een').hide();
+            }
+            if(tel == 15){
+                $('.knoppen-twee').hide();
+                clearInterval(teller);
+                kant3introDone == true;
+            }
+        }, 1000);   
     }
 }
