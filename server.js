@@ -14,31 +14,18 @@
 ///////////////////// 1. Initial Setup /////////////////////
 //////////////////////////////////////////////////////////*/
 
-var http = require('http');
-var fs = require('fs');
-var url = require('url');
+var express = require('express'),
+    app = express(),
+    server = app.listen(8080),
+    io = require('socket.io').listen(server),
+    path = require('path');
 
-var app_handler = function(req, res) {
-  var path, _url;
-  _url = url.parse(decodeURI(req.url), true);
-  path = _url.pathname === '/' ? '/index.html' : _url.pathname;
-  console.log(req.method + " - " + path);
-  fs.readFile(__dirname + path, function(err, data) {
-    if (err) {
-      res.writeHead(500);
-      res.end('error load file');
-    }
-    res.writeHead(200);
-    res.end(data);
-  });
-};
+app.use(express.static(path.join(__dirname, 'public')));
 
-var app = http.createServer(app_handler);
-var io = require('socket.io').listen(app);
-var port = process.argv[2]-0 || 8080;
-app.listen(port);
-console.log("server start - port:" + port);
-console.log(" => http://localhost:"+port);
+app.get('/', function (req, res) {
+    res.sendfile(__dirname + '/index.html');
+});
+
 
 /*//////////////////////////////////////////////////////////
 ///////////////////////// 2. Arduino ///////////////////////
