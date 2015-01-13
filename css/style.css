@@ -6,6 +6,9 @@
     position: fixed;
     top: 0;
     right: 0;
+    z-index: 99;
+    padding: 5px;
+    background: #fff;
 }
 .wrap {
     width: 1280px;
@@ -37,6 +40,7 @@ section.een {
             transform: rotate(-90deg);
 }
 section.drie {
+    position: relative;
     -webkit-transform: rotate(90deg);
        -moz-transform: rotate(90deg);
          -o-transform: rotate(90deg);
@@ -50,3 +54,21 @@ section.vier {
          -o-transform: rotate(180deg);
             transform: rotate(180deg);
 }
+#myVideo {
+    display: none;
+}
+.selectie {
+    position: absolute;
+    width: 159px;
+    height: 159px;
+    top: 581px;
+}
+    .selectie.klas {
+        left: 82px;
+    }
+    .selectie.leerlijn {
+        left: 430px;
+    }
+    .selectie.vermogen {
+        left: 786px;
+    }

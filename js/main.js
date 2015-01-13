@@ -63,7 +63,13 @@ function showSection(showMe){
     $('section.'+ showMe).show();
 }
 function kant1(){
-    //play video en time het
+    $('.start-scherm').hide();
+    $('#myVideo').show();
+    var vid = document.getElementById("myVideo"); 
+    vid.play();
+    if(vid.ended){
+        // ja wat dan?   
+    }
 }
 var interval2Triggered = false;   
 function kant2(){
